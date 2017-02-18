@@ -1,5 +1,6 @@
 class SurveysController < ApplicationController
-  def index
+  def new
+    @survey = Survey.new()
   end
 
   def create
