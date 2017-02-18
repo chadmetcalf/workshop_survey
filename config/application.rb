@@ -24,6 +24,6 @@ module WorkshopSurvey
     end
     config.active_record.primary_key = :uuid
     config.action_controller.action_on_unpermitted_parameters = :raise
-    config.active_job.queue_adapter = :delayed_job
+    Rails.application.config.active_job.queue_adapter = :inline
   end
 end
