@@ -23,14 +23,22 @@
 </head>
 <body class="<%= body_class %>">
   <div class="container">
-    <% if signed_in? %>
-      Signed in as: <%= current_user.email %>
-    <%= button_to 'Sign out', sign_out_path, method: :delete %>
-  <% else %>
-    <%= link_to 'Sign in', sign_in_path %>
-  <% end %>
-  <%= render "flashes" -%>
-  <%= yield %>
+    <div class="header clearfix">
+      <nav class="blog-nav">
+        <a class="navbar-brand" href="#">
+          <%= image_tag('/assets/MSTS.png')%>
+        </a>
+        <ul class="nav nav-pills pull-right">
+          <% if signed_in? %>
+            <li> <%= current_user.email %></li>
+            <li><%= button_to 'Sign out', sign_out_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to 'Sign in', sign_in_path %></li>
+          <% end %>
+      </nav>
+    </div>
+    <%= render "flashes" -%>
+    <%= yield %>
   </div>
   <%= render "javascript" %>
   <%= render "css_overrides" %>

@@ -1,3 +1,11 @@
+/* Nav Brand image */
+.blog-nav {
+  .navbar-brand {
+    height: initial;
+    padding: initial;
+  }
+}
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
@@ -46,10 +54,10 @@ body {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
-.jumbotron .btn {
-  padding: 14px 24px;
-  font-size: 21px;
-}
+// .jumbotron .btn {
+//   padding: 14px 24px;
+//   font-size: 21px;
+// }
 
 /* Supporting marketing content */
 .marketing {
