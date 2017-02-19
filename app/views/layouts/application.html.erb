@@ -29,12 +29,12 @@
           <%= image_tag('/assets/MSTS.png')%>
         </a>
         <ul class="nav nav-pills pull-right">
-          <% if signed_in? %>
-            <li> <%= current_user.email %></li>
-            <li><%= button_to 'Sign out', sign_out_path, method: :delete %></li>
-          <% else %>
-            <li><%= link_to 'Sign in', sign_in_path %></li>
-          <% end %>
+          <%# <% if signed_in? %1> %>
+          <%#   <li> <%= current_user.email %1></li> %>
+          <%#   <li><%= button_to 'Sign out', sign_out_path, method: :delete %1></li> %>
+          <%# <% else %1> %>
+          <%#   <li><%= link_to 'Sign in', sign_in_path %1></li> %>
+          <%# <% end %1> %>
       </nav>
     </div>
     <%= render "flashes" -%>
