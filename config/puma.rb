@@ -13,8 +13,8 @@
 # Starting with a low number of workers and threads provides adequate
 # performance for most applications, even under load, while maintaining a low
 # risk of overusing memory.
-workers Integer(ENV.fetch('WEB_CONCURRENCY', 2))
-threads_count = Integer(ENV.fetch('MAX_THREADS', 2))
+workers Integer(ENV.fetch('WEB_CONCURRENCY', 1))
+threads_count = Integer(ENV.fetch('MAX_THREADS', 1))
 threads(threads_count, threads_count)
 
 preload_app!

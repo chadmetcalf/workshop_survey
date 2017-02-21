@@ -3,8 +3,7 @@ var surveyJson = { title: "Workshop Registration",
   showProgressBar: "top",
   showQuestionNumbers: "false",
   pages: [
-    { title: "How do we get a hold of you?",
-      questions: [
+    { questions: [
       { type: "text", name: "name", isRequired: true, title: "Name"},
       { type: "text", name: "email", isRequired: true, validators: [{type:"email"}], title: "Email"}
     ]},
@@ -13,15 +12,13 @@ var surveyJson = { title: "Workshop Registration",
       questions: [
       { type: "matrix", name: "data", title: "What is your level of familiarity with the concept?",
         columns: [
-        { value: 1, text: "Huh?" },
-        { value: 2, text: " " },
-        { value: 3, text: "Surface Level" },
-        { value: 4, text: " " },
-        { value: 5, text: "Evil Genius" }],
-        rows: [{ value: "refactor", text: "Refactoring" },
-        { value: "concept2", text: "Concept 2" },
-        { value: "concept3", text: "Concept 3" },
-        { value: "concept4", text: "Concept 4" }]}
+          { value: 1, text: "Huh?" },
+          { value: 2, text: " " },
+          { value: 3, text: "Surface Level" },
+          { value: 4, text: " " },
+          { value: 5, text: "Evil Genius" }],
+        rows: <%= raw JSON.generate(Survey.surveyjs_matrix_questions) %>
+      }
     ]}
   ]
 };
@@ -51,9 +48,6 @@ var app = new Vue({
 });
 
 
-// var surveyData = { email: "something@example.com", data: { "better then others": "1"}};
-// survey.data = surveyData;
-
 function sendDataToServer(survey) {
   var surveyData = survey.data;
   if (JSON.stringify(surveyData) === JSON.stringify({})) {
@@ -61,6 +55,7 @@ function sendDataToServer(survey) {
   }
   $.ajax({
     method: "POST",
+    headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
     url: "/surveys",
     data: {'survey': surveyData}
   }).done(function(html) {

@@ -4,20 +4,12 @@
   <meta charset="utf-8" />
   <meta name="ROBOTS" content="NOODP" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <%#
-    Configure default and controller-, and view-specific titles in
-    config/locales/en.yml. For more see:
-    https://github.com/calebthompson/title#usage
-  %>
   <title><%= title %></title>
   <script src="https://unpkg.com/vue@2.1.10/dist/vue.js"></script>
   <%= stylesheet_link_tag :application, media: "all" %>
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-  <%# <!-- Optional theme --> %>
-  <%# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> %>
 
   <%= csrf_meta_tags %>
 </head>
@@ -29,12 +21,11 @@
           <%= image_tag('/assets/MSTS.png')%>
         </a>
         <ul class="nav nav-pills pull-right">
-          <%# <% if signed_in? %1> %>
-          <%#   <li> <%= current_user.email %1></li> %>
-          <%#   <li><%= button_to 'Sign out', sign_out_path, method: :delete %1></li> %>
-          <%# <% else %1> %>
-          <%#   <li><%= link_to 'Sign in', sign_in_path %1></li> %>
-          <%# <% end %1> %>
+          <% if signed_in? %>
+            <li><%= button_to 'Sign out', sign_out_path, method: :delete, class: "btn btn-default navbar-btn"%></li>
+          <% else %>
+            <li><%= link_to 'Sign in', sign_in_path %></li>
+          <% end %>
       </nav>
     </div>
     <%= render "flashes" -%>

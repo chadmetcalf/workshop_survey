@@ -6,3 +6,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+AdminUser.find_or_create_by(email: 'cmetcalf@multiservice.com') do |u|
+  u.password = 'test1234'
+end
+
+100.times do
+  User.create(email: Faker::Internet.safe_email('Nancy'),
+              name: Faker::Name.name)
+end
+
+20.times do
+  data = {}
+  Survey::QUESTIONS.keys.map { |k| data[k] = rand(5) }
+  Survey.create(user: User.all.sample, data: data)
+end

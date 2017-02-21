@@ -1,19 +1,13 @@
 module Admin
-  class SurveysController < Admin::ApplicationController
-    # To customize the behavior of this controller,
-    # simply overwrite any of the RESTful actions. For example:
-    #
-    # def index
-    #   super
-    #   @resources = Survey.all.paginate(10, params[:page])
-    # end
+  class SurveysController < ApplicationController
+    before_action :require_login
 
-    # Define a custom finder by overriding the `find_resource` method:
-    # def find_resource(param)
-    #   Survey.find_by!(slug: param)
-    # end
+    def index
+      @surveys = Survey.has_user.valid
+    end
 
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
-    # for more information
+    def survey_params
+      params.require(:survey).permit!
+    end
   end
 end

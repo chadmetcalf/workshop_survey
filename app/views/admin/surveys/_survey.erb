@@ -1,0 +1,52 @@
+<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-6">
+  <div class="panel panel-info thumbnail">
+    <div class="panel-heading">
+      <%= survey.user_name %>
+    </div>
+    <div class="panel-body">
+      <canvas id="chart-<%= j survey.short_code %>"></canvas>
+    </div>
+  </div>
+</div>
+
+<%- content_for(:javascript) do %>
+  <script>
+var data = {
+  labels: <%= raw JSON.generate(Survey::QUESTIONS.values) %>,
+  datasets: [{
+    backgroundColor: "rgba(179,181,198,0.2)",
+    borderColor: "rgba(179,181,198,1)",
+    pointBackgroundColor: "rgba(179,181,198,1)",
+    pointBorderColor: "#fff",
+    pointHoverBackgroundColor: "#fff",
+    pointHoverBorderColor: "rgba(179,181,198,1)",
+    data: <%= raw JSON.generate(survey.chart_data) %>
+}]
+}
+
+var options = {
+  labels: {
+    display: false,
+  },
+  legend: {
+    display: false,
+  },
+  scale: {
+    pointLabels: {
+      fontSize: 0
+    },
+    ticks: {
+      display: false,
+      max: 4,
+      min: 0
+    }
+  }
+}
+
+new Chart("chart-<%= j survey.short_code %>", {
+  type: "radar",
+  data: data,
+  options: options
+})
+  </script>
+<%- end %>
