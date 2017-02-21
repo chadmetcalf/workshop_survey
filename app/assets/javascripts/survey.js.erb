@@ -16,7 +16,7 @@ var surveyJson = { title: "Workshop Registration",
           { value: 2, text: " " },
           { value: 3, text: "Surface Level" },
           { value: 4, text: " " },
-          { value: 5, text: "Evil Genius" }],
+          { value: 5, text: "All the Familiars" }],
         rows: <%= raw JSON.generate(Survey.surveyjs_matrix_questions) %>
       }
     ]}
@@ -25,7 +25,7 @@ var surveyJson = { title: "Workshop Registration",
 
 var mycustomSurveyStrings = {
   requiredError: "required",
-  completingSurvey: "Thanks for registering! We'll have more information in the next couple of weeks.",
+  completingSurvey: "Thanks for registering! We'll have more information in the next couple of weeks."
 };
 Survey.surveyLocalization.locales["en"] = mycustomSurveyStrings;
 Survey.defaultBootstrapCss.navigationButton = "btn btn-primary";
