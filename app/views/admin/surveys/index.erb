@@ -1,57 +1,27 @@
-<div class="panel panel-default">
-  <div class="panel-heading">Surveys</div>
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-xs-6">
-        <div class="panel panel-warning thumbnail">
-          <div class="panel-heading">
-            Sample Survey
-          </div>
-          <div class="panel-body">
-            <canvas id="sample-chart"></canvas>
-          </div>
-        </div>
+<div class="well">
+  <div class="row">
+    <div class="panel panel-success thumbnail">
+      <div class="panel-heading">
+        <h3>
+          Survey Statistics
+        </h3>
       </div>
+      <div class="panel-body">
+        <table id='statistics' class="table table-condensed">
+          <th></th><th>median</th><th>avg</th><th>var</th>
+          <%- Survey::QUESTIONS.each_pair do |key, value| %>
+            <tr>
+              <td class="text-right row-title"><%= value %></td>
+              <td><%= Survey.median(key.to_s) %></td>
+              <td><%= Survey.avg(key.to_s).round(1) %></td>
+              <td><%= Survey.var(key.to_s).round(1) %></td>
+            </tr>
+          <%- end -%>
+        </table>
+      </div>
+    </div>
+    <div class="row">
       <%= render @surveys %>
     </div>
   </div>
 </div>
-
-<%- content_for(:javascript) do %>
-  <script>
-var data = {
-  labels: <%= raw JSON.generate(Survey::QUESTIONS.values) %>,
-  datasets: [{
-    backgroundColor: "rgba(179,181,198,0.2)",
-    borderColor: "rgba(179,181,198,1)",
-    pointBackgroundColor: "rgba(179,181,198,1)",
-    pointBorderColor: "#fff",
-    pointHoverBackgroundColor: "#fff",
-    pointHoverBorderColor: "rgba(179,181,198,1)",
-    data: <%= raw JSON.generate(Survey::QUESTIONS.map { rand(3) + 2 }) %>
-}]
-}
-
-var options = {
-  labels: {
-    display: false,
-  },
-  legend: {
-    display: false,
-  },
-  scale: {
-    ticks: {
-      display: false,
-      max: 4,
-      min: 0
-    }
-  }
-}
-
-new Chart("sample-chart", {
-  type: "radar",
-  data: data,
-  options: options
-})
-  </script>
-<%- end %>

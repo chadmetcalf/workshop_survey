@@ -18,6 +18,6 @@ end
 
 20.times do
   data = {}
-  Survey::QUESTIONS.keys.map { |k| data[k] = rand(5) }
+  Survey::QUESTIONS.keys.map { |k| data[k] = rand(5)+1 }
   Survey.create(user: User.all.sample, data: data)
 end

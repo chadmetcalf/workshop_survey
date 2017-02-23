@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   constraints Clearance::Constraints::SignedIn.new do
     root to: 'admin/surveys#index', as: :signed_in_root
     namespace :admin do
-      resources :surveys, only: [:index]
+      resources :surveys, only: [:index, :destroy]
     end
   end
 end
