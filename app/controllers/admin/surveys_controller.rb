@@ -3,7 +3,7 @@ module Admin
     before_action :require_login
 
     def index
-      @surveys = Survey.active
+      @surveys = Survey.active.order(:created_at).reverse_order
     end
 
     def destroy

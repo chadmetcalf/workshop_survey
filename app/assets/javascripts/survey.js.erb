@@ -1,5 +1,5 @@
 var surveyJson = { title: "Workshop Registration",
-  cookieName: "_workshop_survey_session",
+  cookieName: "_workshop_registration_session",
   showProgressBar: "top",
   showQuestionNumbers: "false",
   pages: [
@@ -10,13 +10,13 @@ var surveyJson = { title: "Workshop Registration",
     {
       title: "We are looking to fill out the pilot with folks with all levels of experience.",
       questions: [
-      { type: "matrix", name: "data", title: "What is your level of familiarity with the concept?",
+      { type: "matrix", name: "data", title: "Rate your familiarity with the following concepts:",
         columns: [
           { value: 1, text: "Huh?" },
           { value: 2, text: " " },
           { value: 3, text: "Surface Level" },
           { value: 4, text: " " },
-          { value: 5, text: "All the Familiars" }],
+          { value: 5, text: "Evil Genius" }],
         rows: <%= raw JSON.generate(Survey.surveyjs_matrix_questions) %>
       }
     ]}
@@ -24,9 +24,9 @@ var surveyJson = { title: "Workshop Registration",
 };
 
 var mycustomSurveyStrings = {
-  requiredError: "required",
-  completingSurvey: "Thanks for registering! We'll have more information in the next couple of weeks."
+  requiredError: "required"
 };
+
 Survey.surveyLocalization.locales["en"] = mycustomSurveyStrings;
 Survey.defaultBootstrapCss.navigationButton = "btn btn-primary";
 Survey.defaultBootstrapCss.footer = "panel-footer text-center";
@@ -35,6 +35,8 @@ Survey.Survey.cssType = "bootstrap";
 var survey = new Survey.Model(surveyJson);
 survey.locale = "en";
 survey.onComplete.add(sendDataToServer);
+survey.onComplete.add(removeParentWell);
+survey.completedHtml = '<div class="alert alert-success" role="alert">Thanks for registering. Keep an eye out for details in the coming weeks.</div>'
 survey.showTitle = false;
 survey.showPageTitles = true;
 
@@ -47,6 +49,15 @@ var app = new Vue({
   }
 });
 
+$(document).ready(function() {
+  if (survey.isCompleted !== true) {
+    $("#surveyContainer").addClass("well");
+  }
+});
+
+function removeParentWell() {
+  $("#surveyContainer").removeClass("well");
+}
 
 function sendDataToServer(survey) {
   var surveyData = survey.data;
