@@ -29,6 +29,14 @@ Rails.application.configure do
   config.public_file_server.headers = {
     'Cache-Control' => 'public, max-age=31557600'
   }
-  config.action_mailer.default_url_options = { host: ENV.fetch('APPLICATION_HOST') }
+  ActionMailer::Base.smtp_settings = {
+    port: ENV['MAILGUN_SMTP_PORT'],
+    address: ENV['MAILGUN_SMTP_SERVER'],
+    user_name: ENV['MAILGUN_SMTP_LOGIN'],
+    password: ENV['MAILGUN_SMTP_PASSWORD'],
+    domain: 'workshop-registration.heroku.com',
+    authentication: :plain
+  }
+  ActionMailer::Base.delivery_method = :smtp
 end
 Rack::Timeout.timeout = (ENV['RACK_TIMEOUT'] || 10).to_i
