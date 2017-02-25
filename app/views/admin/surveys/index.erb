@@ -3,7 +3,7 @@
     <div class="panel panel-success thumbnail">
       <div class="panel-heading">
         <h3>
-          Survey Statistics
+          <%= Survey.active.count %> surveys submitted
         </h3>
       </div>
       <div class="panel-body">
@@ -12,9 +12,9 @@
           <%- Survey::QUESTIONS.each_pair do |key, value| %>
             <tr>
               <td class="text-right row-title"><%= value %></td>
-              <td><%= Survey.median(key.to_s) %></td>
-              <td><%= Survey.avg(key.to_s).round(1) %></td>
-              <td><%= Survey.var(key.to_s).round(1) %></td>
+              <td><%= Survey.active.median(key.to_s) %></td>
+              <td><%= Survey.active.avg(key.to_s).round(1) %></td>
+              <td><%= Survey.active.var(key.to_s).round(1) %></td>
             </tr>
           <%- end -%>
         </table>
