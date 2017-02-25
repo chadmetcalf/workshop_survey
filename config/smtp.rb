@@ -1,13 +1,12 @@
-# SMTP_SETTINGS = {
-#   address: ENV.fetch('MAILGUN_SMTP_SERVER'),
-#   authentication: :plain,
-#   domain: 'workshop-registration.heroku.com',
-#   enable_starttls_auto: true,
-#   password: ENV.fetch('MAILGUN_SMTP_PASSWORD'),
-#   port: ENV.fetch('MAILGUN_SMTP_PORT'),
-#   user_name: ENV.fetch('MAILGUN_SMTP_LOGIN'),
-#   authentication: :plain
-# }.freeze
+SMTP_SETTINGS = {
+  address: ENV.fetch('POSTMARK_SMTP_SERVER'),
+  user_name: ENV.fetch('POSTMARK_API_TOKEN'),
+  password: ENV.fetch('POSTMARK_API_TOKEN'),
+  domain: ENV['APPLICATION_HOST'],
+  port: 25, # or 2525
+  authentication: :plain,
+  enable_starttls_auto: true
+}.freeze
 
 if ENV['EMAIL_RECIPIENTS'].present?
   Mail.register_interceptor RecipientInterceptor.new(ENV['EMAIL_RECIPIENTS'])
