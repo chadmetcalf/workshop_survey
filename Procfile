@@ -1,2 +1,2 @@
 web: bundle exec puma -p $PORT -C ./config/puma.rb
-worker: bundle exec sidekiq -c 10 -v
+worker: bundle exec sidekiq -c 10 -q default -q mailers
