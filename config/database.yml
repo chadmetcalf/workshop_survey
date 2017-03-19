@@ -11,11 +11,18 @@ test:
   <<: *default
   database: workshop_survey_test
 
-production: &deploy
-  encoding: utf8
-  min_messages: warning
-  pool: <%= [Integer(ENV.fetch("MAX_THREADS", 5)), Integer(ENV.fetch("DB_POOL", 5))].max %>
-  timeout: 5000
-  url:  <%= ENV.fetch("DATABASE_URL", "") %>
+production:
+  <<: *default
+  encoding: unicode
+  database: <%= ENV['RDS_DB_NAME'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: <%= ENV['RDS_PORT'] %>
 
-staging: *deploy
+# production: &deploy
+#   encoding: utf8
+#   min_messages: warning
+#   pool: <%= [Integer(ENV.fetch("MAX_THREADS", 5)), Integer(ENV.fetch("DB_POOL", 5))].max %>
+#   timeout: 5000
+#   url:  <%= ENV.fetch("DATABASE_URL", "") %>

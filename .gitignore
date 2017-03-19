@@ -11,3 +11,10 @@
 /public/assets
 /tags
 /tmp/*
+/load_test
+
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

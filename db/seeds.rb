@@ -11,6 +11,8 @@ AdminUser.find_or_create_by(email: 'cmetcalf@multiservice.com') do |u|
   u.password = 'test1234'
 end
 
+require 'faker'
+
 100.times do
   User.create(email: Faker::Internet.safe_email('Nancy'),
               name: Faker::Name.name)

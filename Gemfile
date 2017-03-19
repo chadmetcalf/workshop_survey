@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
 
-ruby '2.4.0'
+# TODO: https://hackernoon.com/how-to-setup-and-deploy-a-rails-5-app-on-aws-beanstalk-with-postgresql-redis-and-more-88a38355f1ea#.fzw1ll3nt
+
+ruby '2.3.1'
 
 # gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin', branch: 'master'
 # gem "administrate", git: 'https://github.com/thoughtbot/administrate', branch: 'nc-rails5'
@@ -14,16 +16,16 @@ gem 'jquery-rails'
 gem 'normalize-rails', '~> 3.0.0'
 gem 'oj'
 gem 'pg'
-gem 'postmark-rails'
+# gem 'postmark-rails'
 gem 'puma'
 gem 'rack-canonical-host'
-gem 'rails', git: 'https://github.com/rails/rails', branch: '5-0-stable'
+gem 'rails', '5.0.1'
 gem 'recipient_interceptor'
-gem 'rollbar'
+# gem 'rollbar'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
 gem 'simple_form'
-gem 'skylight'
+# gem 'skylight'
 gem 'sprockets', '>= 3.0.0'
 gem 'suspenders'
 gem 'title'
@@ -50,7 +52,6 @@ group :development, :test do
   gem 'bundler-audit', '>= 0.5.0', require: false
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'
@@ -61,6 +62,7 @@ group :development, :staging do
 end
 
 group :test do
+  gem 'faker'
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'formulaic'

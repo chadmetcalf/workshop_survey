@@ -1,7 +1,7 @@
 SMTP_SETTINGS = {
-  address: ENV.fetch('POSTMARK_SMTP_SERVER'),
-  user_name: ENV.fetch('POSTMARK_API_TOKEN'),
-  password: ENV.fetch('POSTMARK_API_TOKEN'),
+  address: ENV.fetch('POSTMARK_SMTP_SERVER', ''),
+  user_name: ENV.fetch('POSTMARK_API_TOKEN', ''),
+  password: ENV.fetch('POSTMARK_API_TOKEN', ''),
   domain: ENV['APPLICATION_HOST'],
   port: 25, # or 2525
   authentication: :plain,
