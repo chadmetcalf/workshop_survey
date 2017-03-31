@@ -1,0 +1,12 @@
+branch-defaults:
+  production:
+    environment: production
+global:
+  application_name: workshop_survey
+  branch: production
+  default_ec2_keyname: aws-eb
+  default_platform: Ruby 2.3 (Puma)
+  default_region: us-west-2
+  profile: eb-cli
+  repository: null
+  sc: git
