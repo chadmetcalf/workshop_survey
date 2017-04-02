@@ -1,9 +1,5 @@
 # frozen_string_literal: true
-class ApplicationController < ActionController::Base
+class AdminApplicationController < ActionController::Base
   include Clearance::Controller
   protect_from_forgery with: :exception
-
-  def current_user
-    User.new
-  end
 end
