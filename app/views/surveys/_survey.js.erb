@@ -1,0 +1,48 @@
+Survey.defaultBootstrapCss.navigationButton = "btn btn-primary";
+Survey.defaultBootstrapCss.footer = "panel-footer text-center";
+Survey.Survey.cssType = "bootstrap";
+
+var surveyLocalization = {
+  requiredError: "required"
+};
+Survey.surveyLocalization.locales["en"] = surveyLocalization;
+
+var survey = new Survey.Model(<%= raw JSON.generate(@survey.config) %>);
+survey.onComplete.add(sendDataToServer);
+survey.onComplete.add(removeParentWell);
+
+var app = new Vue({
+  el: '#surveyContainer',
+  data: {
+    survey: survey
+  },
+  methods: {
+  }
+});
+
+$(document).ready(function() {
+  if (survey.isCompleted !== true) {
+    $("#sq-page textarea").addClass("form-control");
+    survey.setValue("type", "<%= @survey.type %>");
+    $("#surveyContainer").addClass("well");
+  }
+});
+
+function removeParentWell() {
+  $("#surveyContainer").removeClass("well");
+}
+
+function sendDataToServer(survey) {
+  var surveyData = survey.data;
+  if (JSON.stringify(surveyData) === JSON.stringify({})) {
+    surveyData = {empty: true};
+  }
+  $.ajax({
+    method: "POST",
+    headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+    url: "/surveys",
+    data: {'survey': surveyData}
+  }).done(function(html) {
+    return $("#results").append(html);
+  })
+}

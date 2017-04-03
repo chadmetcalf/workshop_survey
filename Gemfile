@@ -21,11 +21,11 @@ gem 'puma'
 gem 'rack-canonical-host'
 gem 'rails', '5.0.1'
 gem 'recipient_interceptor'
-# gem 'rollbar'
+gem 'rollbar'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
 gem 'simple_form'
-# gem 'skylight'
+gem 'skylight'
 gem 'sprockets', '>= 3.0.0'
 gem 'suspenders'
 gem 'title'
@@ -58,7 +58,7 @@ group :development, :test do
 end
 
 group :development, :staging do
-  gem 'rack-mini-profiler', require: false
+  gem 'rack-mini-profiler'
 end
 
 group :test do

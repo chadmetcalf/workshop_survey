@@ -1,6 +1,6 @@
 <div class="page-header">
   <h3 class="text-muted">
-    Workshop Registration
+    <%= @survey.title %>
     <br/>
     <small>Eight topics • Eight weeks • Two 30 minute sessions per week </small>
   </h3>
@@ -14,6 +14,8 @@
   <survey :survey="survey"></survey>
 </div>
 
-<%- content_for(:javascript) do%>
-  <%=javascript_include_tag 'survey' %>
+<%- content_for(:javascript) do %>
+  <script>
+     <%= render 'survey.js' %>
+  </script>
 <%- end %>

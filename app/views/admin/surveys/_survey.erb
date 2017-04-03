@@ -20,7 +20,7 @@
 <%- content_for(:javascript) do %>
   <script>
 var data = {
-  labels: <%= raw JSON.generate(Survey::QUESTIONS.values.map { |v| v[/[a-zA-Z]/ =~ v] }) %>,
+  labels: <%= raw JSON.generate(WorkshopRegistration.baseline_questions.values.map { |v| v[/[a-zA-Z]/ =~ v] }) %>,
   datasets: [{
     backgroundColor: "rgba(179,181,198,0.2)",
     borderColor: "rgba(179,181,198,1)",

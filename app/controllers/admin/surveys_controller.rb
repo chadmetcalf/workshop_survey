@@ -1,9 +1,9 @@
 module Admin
-  class SurveysController < ApplicationController
+  class SurveysController < AdminApplicationController
     before_action :require_login
 
     def index
-      @surveys = Survey.active.order(:created_at).reverse_order
+      @surveys = WorkshopRegistration.active.order(:created_at).reverse_order
     end
 
     def destroy

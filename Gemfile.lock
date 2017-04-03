@@ -168,6 +168,7 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    multi_json (1.12.1)
     nenv (0.3.0)
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
@@ -234,6 +235,8 @@ GEM
     recipient_interceptor (0.1.2)
       mail
     redis (3.3.3)
+    rollbar (2.14.1)
+      multi_json
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -287,6 +290,8 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
+    skylight (1.1.0)
+      activesupport (>= 3.0.0)
     slop (3.6.0)
     spring (2.0.1)
       activesupport (>= 4.2)
@@ -371,12 +376,14 @@ DEPENDENCIES
   rack-timeout
   rails (= 5.0.1)
   recipient_interceptor
+  rollbar
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   shoulda-matchers
   sidekiq
   simple_form
   simplecov
+  skylight
   spring
   spring-commands-rspec
   sprockets (>= 3.0.0)
