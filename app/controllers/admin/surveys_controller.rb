@@ -3,7 +3,7 @@ module Admin
     before_action :require_login
 
     def index
-      @surveys = WorkshopRegistration.active.order(:created_at).reverse_order
+      @surveys = WorkshopRegistration.active.order(:created_at).reverse_order.page params[:page]
     end
 
     def destroy

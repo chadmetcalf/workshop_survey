@@ -2,9 +2,9 @@
 class Survey < ApplicationRecord
   belongs_to :user
 
-  scope :active, -> { has_user.valid.where(active: true) }
-  scope :has_user, -> { includes(:user).where.not(user: nil) }
-  scope :valid,    -> { where.not(data: nil) }
+  scope :active,    -> { with_user.valid.where(active: true) }
+  scope :with_user, -> { includes(:user).where.not(user: nil) }
+  scope :valid,     -> { where.not(data: nil) }
 
   delegate :name, to: :user, prefix: true, allow_nil: true
 
@@ -30,13 +30,15 @@ class Survey < ApplicationRecord
   end
 
   def chart_data
-    questions.keys.map do |key|
-      data.fetch(key.to_s, "0").to_i
-    end
+    []
   end
 
   def cookie_name
     [self.class.name.underscore, 'session'].join('_').prepend('_')
+  end
+
+  def to_partial_path
+    'surveys/survey'
   end
 
   class << self
@@ -79,5 +81,13 @@ class Survey < ApplicationRecord
     def results
       @_results ||= Survey.active.pluck(:data)
     end
+  end
+end
+
+class Null < Survey
+  title 'Engineering Workshops'
+
+  def to_partial_path
+    'surveys/null_survey'
   end
 end

@@ -9,7 +9,7 @@
       <div class="panel-body">
         <table id='statistics' class="table table-condensed">
           <th></th><th>median</th><th>avg</th><th>var</th>
-          <%- Survey::QUESTIONS.each_pair do |key, value| %>
+          <%- WorkshopRegistration.baseline_questions.each_pair do |key, value| %>
             <tr>
               <td class="text-right row-title"><%= value %></td>
               <td><%= Survey.active.median(key.to_s) %></td>
@@ -21,7 +21,13 @@
       </div>
     </div>
     <div class="row">
+      <%= paginate @surveys, remote: true %>
+    </div>
+    <div class="row">
       <%= render @surveys %>
+    </div>
+    <div class="row">
+      <%= paginate @surveys, remote: true %>
     </div>
   </div>
 </div>

@@ -1,0 +1,13 @@
+<%= paginator.render do -%>
+  <div class="center-block text-center">
+    <ul class="pagination">
+      <%= prev_page_tag %>
+      <% each_page do |page| -%>
+        <% if page.inside_window? -%>
+          <%= page_tag page %>
+        <% end -%>
+      <% end -%>
+      <%= next_page_tag %>
+    </ul>
+  </div>
+<% end -%>

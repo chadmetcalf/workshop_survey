@@ -11,6 +11,12 @@ class WorkshopRegistration < Survey
     )
   end
 
+  def chart_data
+    baseline_questions.keys.map do |key|
+      data.fetch(key.to_s, '0').to_i
+    end
+  end
+
   class << self
     # rubocop:disable MethodLength
     def surveyjs_pages

@@ -2,20 +2,11 @@
   <h3 class="text-muted">
     <%= @survey.title %>
     <br/>
-    <small>Eight topics • Eight weeks • Two 30 minute sessions per week </small>
+    <small>Eight topics • Sixteen 30 min sessions</small>
   </h3>
 </div>
-<%# <p class="lead"> %>
-<%#   For the pilot program we are looking to fill out a couple of groups. %>
-<%#   Each group will be comprised of four individuals, from different teams, with varying levels of experience. %>
-<%# </p> %>
+<p class="lead">
+<%# A Place for General Announcements %>
+</p>
 
-<div id="surveyContainer">
-  <survey :survey="survey"></survey>
-</div>
-
-<%- content_for(:javascript) do %>
-  <script>
-     <%= render 'survey.js' %>
-  </script>
-<%- end %>
+<%= render @survey %>

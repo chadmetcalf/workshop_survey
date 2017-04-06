@@ -55,30 +55,39 @@ class FourWeekFeedback < Survey
     end
 
     # Feedback questions
+    # rubocop:disable MethodLength
     def surveyjs_feedback_questions
       [
-        { title: 'What areas have the workshops had a role in triggering your curiosity?',
-          type:  'comment',
-          name:  'learning_culture' },
-        { title: 'How has the group size been condusive to discussion?',
-          type:  'comment',
-          name:  'group_size' },
-        { title: 'How has the time commitment impacted your other responsibilities?',
-          type:  'comment',
-          name:  'time_commitment' },
         { title: 'Is there enough value in the workshops to roll the program out to more folks?',
           type: 'radiogroup',
           colCount: 4,
           choices: %w(Yes No),
-          name:  'value' }
+          name:  'value' },
+        { title: 'Have the workshops had an influence on how you approach your work?',
+          type: 'radiogroup',
+          colCount: 4,
+          choices: %w(Yes No),
+          name:  'impact' },
+        { title: 'How has the group size affected discussion?',
+          type:  'comment',
+          name:  'group_size' },
+        { title: 'What areas have the workshops had a role in triggering your curiosity?',
+          type:  'comment',
+          name:  'learning_culture' },
+        { title: 'How has the time commitment impacted your other responsibilities?',
+          type:  'comment',
+          name:  'time_commitment' }
       ]
     end
+    # rubocop:enable MethodLength
 
+    # rubocop:disable Metrics/LineLength
     def surveyjs_feedback_page
       {
         title: 'We are looking to see if the workshops are scratching the right itch for MSTS. Please take a sec to leave some feedback on how the pilot program is going.',
         questions: surveyjs_feedback_questions
       }
     end
+    # rubocop:enable Metrics/LineLength
   end
 end
