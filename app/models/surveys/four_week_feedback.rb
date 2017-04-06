@@ -4,8 +4,13 @@ class FourWeekFeedback < Survey
 
   delegate :surveyjs_pages, to: :class
   delegate :baseline_questions, to: :class
+  delegate :data_param_keys, to: :class
 
   class << self
+    def data_param_keys
+      surveyjs_pages.flat_map { |p| p[:questions].map { |q| q[:name] } } - %w(type name email)
+    end
+
     def surveyjs_pages
       [
         {
@@ -38,7 +43,7 @@ class FourWeekFeedback < Survey
 
     def surveyjs_baseline_questions
       [
-        { type: 'matrix', name: 'data', title: 'Rate your familiarity with the following concepts:',
+        { type: 'matrix', name: 'baseline', title: 'Rate your familiarity with the following concepts:',
           columns: [{ value: 1, text: 'Huh?' },
                     { value: 2, text: ' ' },
                     { value: 3, text: 'Surface Level' },

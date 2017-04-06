@@ -1,7 +1,8 @@
 <div class="jumbotron">
   <h2>Which survey are you here to take?</h2>
   <div>
-<%= link_to 'Workshop Registration', new_survey_path(type: 'WorkshopRegistration'), class: "btn btn-large btn-primary" %>
-<%= link_to 'Four Week Feedback', new_survey_path(type: 'FourWeekFeedback'), class: "btn btn-large btn-primary" %>
-<div>
+    <%- @survey_types_not_taken.each do |survey_type| %>
+      <%= link_to survey_type.underscore.humanize.titleize, new_survey_path(type: survey_type), class: "btn btn-large btn-primary" %>
+    <%- end %>
+  </div>
 </div>

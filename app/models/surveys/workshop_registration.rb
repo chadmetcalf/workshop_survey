@@ -4,6 +4,7 @@ class WorkshopRegistration < Survey
 
   delegate :surveyjs_pages, to: :class
   delegate :baseline_questions, to: :class
+  delegate :data_param_keys, to: :class
 
   def config
     super.merge(
@@ -18,6 +19,10 @@ class WorkshopRegistration < Survey
   end
 
   class << self
+    def data_param_keys
+      surveyjs_pages.flat_map { |p| p[:questions].map { |q| q[:name] } } - %w(type name email)
+    end
+
     # rubocop:disable MethodLength
     def surveyjs_pages
       [

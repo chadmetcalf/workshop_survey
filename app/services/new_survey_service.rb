@@ -30,7 +30,7 @@ class NewSurveyService
   end
 
   def use_user_survey_type?
-    user_types_taken_by_user.any? && next_survey_type_from_user.present?
+    survey_types_taken_by_user.any? && next_survey_type_from_user.present?
   end
 
   def next_survey_type_from_params
@@ -42,10 +42,10 @@ class NewSurveyService
   end
 
   def next_survey_type_from_user
-    (survey_types - user_types_taken_by_user).first
+    (survey_types - survey_types_taken_by_user).first
   end
 
-  def user_types_taken_by_user
+  def survey_types_taken_by_user
     @_uttby ||= @user.surveys.pluck(:types)
   end
 
@@ -53,6 +53,10 @@ class NewSurveyService
     survey_types.select do |klass_name|
       @cookies[klass_name.safe_constantize.cookie_name] == 'true'
     end
+  end
+
+  def survey_types_not_taken
+    survey_types - ["Null", *survey_types_taken_by_user, *survey_types_taken_from_cookies]
   end
 
   def survey_types
