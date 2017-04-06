@@ -26,7 +26,7 @@ class NewSurveyService
   end
 
   def use_cookie_survey_type?
-    next_survey_type_from_cookies.present?
+    survey_types_taken_from_cookies.any? && next_survey_type_from_cookies.present?
   end
 
   def use_user_survey_type?
