@@ -6,6 +6,6 @@ test:
   host: 'localhost'
   port: '6379'
 
-production:
-  host: 'msts-workshop.olqez0.0001.usw2.cache.amazonaws.com'
-  port: '6379'
+# production:
+#   host: 'msts-workshop.olqez0.0001.usw2.cache.amazonaws.com'
+#   port: '6379'
