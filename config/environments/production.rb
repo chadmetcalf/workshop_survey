@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 require Rails.root.join('config/smtp')
 Rails.application.configure do
-  ENV['APPLICATION_HOST'] = 'production.pa2grjvvr9.us-west-2.elasticbeanstalk.com'
   config.middleware.use Rack::CanonicalHost, ENV.fetch('APPLICATION_HOST')
   config.cache_classes = true
   config.eager_load = true
