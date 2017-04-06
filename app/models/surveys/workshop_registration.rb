@@ -14,7 +14,7 @@ class WorkshopRegistration < Survey
 
   def chart_data
     baseline_questions.keys.map do |key|
-      data.fetch(key.to_s, '0').to_i
+      (data['data'] || data).fetch(key.to_s, '0').to_i
     end
   end
 
