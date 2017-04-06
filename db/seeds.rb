@@ -18,6 +18,10 @@ require 'faker'
               name: Faker::Name.name)
 end
 
+%(WorkshopRegistration FourWeekFeedback Null).each do |survey_type|
+  Survey.find_or_create_by(active: false, type: survey_type)
+end
+
 30.times do
   data = WorkshopRegistration.baseline_questions.keys.each_with_object({}) { |k, acc| acc[k] = rand(5)+1 }
   WorkshopRegistration.create(user: User.all.sample, data: data, finished_at: Time.now.utc)
