@@ -5,7 +5,7 @@ class SurveysController < ApplicationController
 
   def new
     @survey = new_survey.process
-    @survey_types_not_taken = new_survey.survey_types_not_taken.reverse
+    @survey_types_not_taken = new_survey.survey_types_not_taken
   end
 
   def create
