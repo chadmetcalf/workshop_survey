@@ -18,6 +18,10 @@ class WorkshopRegistration < Survey
     end
   end
 
+  def to_partial_path
+    'surveys/workshop_registration'
+  end
+
   class << self
     def data_param_keys
       surveyjs_pages.flat_map { |p| p[:questions].map { |q| q[:name] } } - %w(type name email)
@@ -62,6 +66,10 @@ class WorkshopRegistration < Survey
       baseline_questions.map do |value, text|
         { 'value': value.to_s, 'text': text.to_s }
       end
+    end
+
+    def results
+      @_results ||= active.pluck(:data).map{ |d| d['data'] }
     end
   end
 end

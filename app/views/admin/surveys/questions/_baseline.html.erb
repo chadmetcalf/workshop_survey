@@ -1,0 +1,44 @@
+<canvas id="chart-<%= j baseline.object_id.to_s %>"></canvas>
+
+<%- content_for(:javascript) do %>
+  <script>
+var data = {
+  labels: <%= raw JSON.generate(baseline.labels) %>,
+  datasets: [
+    { backgroundColor: "rgba(179,181,198,0.2)",
+      borderColor: "rgba(179,181,198,1)",
+      label: "Four Week Feedback",
+      pointBackgroundColor: "rgba(179,181,198,1)",
+      pointBorderColor: "#fff",
+      pointHoverBackgroundColor: "#fff",
+      pointHoverBorderColor: "rgba(179,181,198,1)",
+      data: <%= raw JSON.generate(baseline.chart_data) %> },
+  ]
+}
+
+var options = {
+  labels: {
+    display: false,
+  },
+  legend: {
+    display: false,
+  },
+  scale: {
+    pointLabels: {
+      fontSize: 8
+    },
+    ticks: {
+      display: false,
+      max: 5,
+      min: 0
+    }
+  }
+}
+
+new Chart("chart-<%= j baseline.object_id.to_s %>", {
+  type: "radar",
+  data: data,
+  options: options
+})
+  </script>
+<%- end %>

@@ -1,24 +1,23 @@
-<div class="well">
   <div class="row">
     <div class="panel panel-success thumbnail">
       <div class="panel-heading">
         <h3>
-          <%= Survey.active.count %> surveys submitted
+          <%= @survey_type.active.count %> surveys submitted
         </h3>
       </div>
-      <div class="panel-body">
-        <table id='statistics' class="table table-condensed">
-          <th></th><th>median</th><th>avg</th><th>var</th>
-          <%- WorkshopRegistration.baseline_questions.each_pair do |key, value| %>
-            <tr>
-              <td class="text-right row-title"><%= value %></td>
-              <td><%= Survey.active.median(key.to_s) %></td>
-              <td><%= Survey.active.avg(key.to_s).round(1) %></td>
-              <td><%= Survey.active.var(key.to_s).round(1) %></td>
-            </tr>
-          <%- end -%>
-        </table>
-      </div>
+      <%# <div class="panel-body"> %>
+      <%#   <table id='statistics' class="table table-condensed"> %>
+      <%#     <th></th><th>median</th><th>avg</th><th>var</th> %>
+      <%#     <%- Questions::Baseline.questions.each_pair do |key, value| %1> %>
+      <%#       <tr> %>
+      <%#         <td class="text-right row-title"><%= value %1></td> %>
+      <%#         <td><%= @survey_type.median(key.to_s) %1></td> %>
+      <%#         <td><%= @survey_type.avg(key.to_s).round(1) %1></td> %>
+      <%#         <td><%= @survey_type.var(key.to_s).round(1) %1></td> %>
+      <%#       </tr> %>
+      <%#     <%- end %>
+      <%#   </table> %>
+      <%# </div> %>
     </div>
     <div class="row">
       <%= paginate @surveys, remote: true %>
@@ -30,4 +29,3 @@
       <%= paginate @surveys, remote: true %>
     </div>
   </div>
-</div>

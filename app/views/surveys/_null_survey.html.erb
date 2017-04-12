@@ -1,8 +1,14 @@
 <div class="jumbotron">
-  <h2>Which survey are you here to take?</h2>
-  <div>
-    <%- @survey_types_not_taken.each do |survey_type| %>
-      <%= link_to survey_type.underscore.humanize.titleize, new_survey_path(type: survey_type), class: "btn btn-large btn-primary" %>
-    <%- end %>
-  </div>
+  <%- if @survey_types_not_taken.any? %>
+    <h2>Which survey are you here to take?</h2>
+    <div>
+      <%- @survey_types_not_taken.each do |survey_type| %>
+        <%= link_to survey_type.name.titleize, new_survey_path(type: survey_type.name), class: "btn btn-large btn-primary" %>
+      <%- end %>
+    </div>
+  <%- else %>
+    <div>
+      We're using your feedback to measure the impact and viability of the workshops. Thanks for participating in the pilot program.
+    </div>
+  <%- end %>
 </div>

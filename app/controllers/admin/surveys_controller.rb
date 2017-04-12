@@ -3,7 +3,8 @@ module Admin
     before_action :require_login
 
     def index
-      @surveys = WorkshopRegistration.active.order(:created_at).reverse_order.page params[:page]
+      @survey_type = params[:type].present? ? params[:type].constantize : Survey
+      @surveys = Survey.active.order(:created_at).reverse_order.type(params[:type]).page(params[:page])
     end
 
     def destroy

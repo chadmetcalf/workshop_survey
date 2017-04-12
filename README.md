@@ -2,6 +2,15 @@
 
 ## Getting Started
 
+* Clone the repo locally
+* Copy `.env.sample` to `.env`
+  * generate development secret key
+  * Add your user (Used by seeds file)
+* Setup the databases: `bin/rails db:setup`
+  * Creates the database (postgresql)
+  * Migrates the database
+  * Seed the database
+* `bin/rails server`
 
 
 ## Guidelines

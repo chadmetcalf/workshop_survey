@@ -1,0 +1,12 @@
+<p class="lead">
+</p>
+
+<div id="surveyContainer">
+  <survey :survey="survey"></survey>
+</div>
+
+<%- content_for(:javascript) do %>
+  <script>
+     <%= render 'survey.js' %>
+  </script>
+<%- end %>

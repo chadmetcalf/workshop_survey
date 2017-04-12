@@ -17,12 +17,11 @@ class NewSurveyService
     return next_survey_type_from_params  if use_params_survey_type?
     return next_survey_type_from_user    if use_user_survey_type?
     return next_survey_type_from_cookies if use_cookie_survey_type?
-    'Null'
+    Null
   end
 
   def use_params_survey_type?
-    @params.key?('type')
-    survey_types.include?(@params['type'])
+    survey_types.map(&:name).include?(@params['type'])
   end
 
   def use_cookie_survey_type?
@@ -50,16 +49,16 @@ class NewSurveyService
   end
 
   def survey_types_taken_from_cookies
-    survey_types.select do |klass_name|
-      @cookies[klass_name.safe_constantize.cookie_name] == 'true'
+    survey_types.select do |type|
+      @cookies[type.cookie_name] == 'true'
     end
   end
 
   def survey_types_not_taken
-    survey_types - ["Null", *survey_types_taken_by_user, *survey_types_taken_from_cookies]
+    survey_types - [Null, *survey_types_taken_by_user, *survey_types_taken_from_cookies]
   end
 
   def survey_types
-    @_survey_types ||= Survey.types.dup
+    Survey.types
   end
 end

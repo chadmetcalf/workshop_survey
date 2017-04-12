@@ -5,8 +5,15 @@ class Survey < ApplicationRecord
   scope :active,    -> { with_user.valid.where(active: true) }
   scope :with_user, -> { includes(:user).where.not(user: nil) }
   scope :valid,     -> { where.not(data: nil) }
+  scope :type,      ->(type) { where(type: type) if type.present? }
 
   delegate :name, to: :user, prefix: true, allow_nil: true
+
+  after_initialize :initialize_data
+
+  def initialize_data
+    self['data'] ||= {}
+  end
 
   def config
     {
@@ -43,7 +50,7 @@ class Survey < ApplicationRecord
 
   class << self
     def types
-      distinct.pluck(:type)
+      [Null, WorkshopRegistration, FourWeekFeedback].freeze
     end
 
     def title(survey_title = "Generic Survey")
@@ -63,23 +70,23 @@ class Survey < ApplicationRecord
     def avg(key)
       return @_avg if @_avg && (@_key == key)
       @_key = key
-      @_avg = (data(key).inject(0.0) { |k, v| k + v }) / Float(data(key).length)
+      @_avg = (agg_data(key).inject(0.0) { |k, v| k + v }) / Float(agg_data(key).length)
     end
 
     def median(key)
-      data(key).sort[data(key).length/2]
+      agg_data(key).sort[agg_data(key).length/2]
     end
 
     def var(key)
-      data(key).inject(0.0) { |k, v| k + (v - avg(key))**2 } / Float(data(key).length)
+      agg_data(key).inject(0.0) { |k, v| k + (v - avg(key))**2 } / Float(agg_data(key).length)
     end
 
-    def data(key)
+    def agg_data(key)
       results.map { |survey| survey[key].to_i }
     end
 
     def results
-      @_results ||= Survey.active.pluck(:data)
+      @_results ||= types.flat_map(&:results)
     end
   end
 end
