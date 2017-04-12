@@ -3,10 +3,8 @@ source 'https://rubygems.org'
 
 # TODO: https://hackernoon.com/how-to-setup-and-deploy-a-rails-5-app-on-aws-beanstalk-with-postgresql-redis-and-more-88a38355f1ea#.fzw1ll3nt
 
-ruby '2.3.1'
+ruby '2.4.1'
 
-# gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin', branch: 'master'
-# gem "administrate", git: 'https://github.com/thoughtbot/administrate', branch: 'nc-rails5'
 gem 'autoprefixer-rails'
 gem 'clearance'
 gem 'coffee-script'
@@ -64,7 +62,6 @@ end
 
 group :test do
   gem 'faker'
-  # gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'formulaic'
   gem 'launchy'
