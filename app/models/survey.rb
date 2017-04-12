@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+
 class Survey < ApplicationRecord
   belongs_to :user
 
-  scope :active,    -> { with_user.valid.where(active: true) }
-  scope :with_user, -> { includes(:user).where.not(user: nil) }
-  scope :valid,     -> { where.not(data: nil) }
-  scope :type,      ->(type) { where(type: type) if type.present? }
+  scope :active,    (-> { with_user.valid.where(active: true) })
+  scope :with_user, (-> { includes(:user).where.not(user: nil) })
+  scope :valid,     (-> { where.not(data: nil) })
+  scope :type,      (->(type) { where(type: type) if type.present? })
 
   delegate :name, to: :user, prefix: true, allow_nil: true
 

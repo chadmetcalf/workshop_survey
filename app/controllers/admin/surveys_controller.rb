@@ -3,7 +3,7 @@ module Admin
     before_action :require_login
 
     def index
-      @survey_type = params[:type].present? ? params[:type].constantize : Survey
+      @survey_type = survey_type
       @surveys = Survey.active.order(:created_at).reverse_order.type(params[:type]).page(params[:page])
     end
 
@@ -18,6 +18,10 @@ module Admin
     end
 
     private
+
+    def survey_type
+      params[:type].try(:safe_constantize) || Survey
+    end
 
     def survey_params
       params.require(:survey).permit!
