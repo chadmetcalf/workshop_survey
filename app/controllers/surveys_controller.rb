@@ -11,7 +11,7 @@ class SurveysController < ApplicationController
   def create
     @_current_user = User.find_or_initialize_by(email: survey_params[:email], name: survey_params[:name])
 
-    @survey = Survey.create!(type: survey_params[:type], user: @user, data: data_params, finished_at: Time.now.utc)
+    @survey = Survey.create!(type: survey_params[:type], user: @_current_user, data: data_params, finished_at: Time.now.utc)
   end
 
   def new_survey
