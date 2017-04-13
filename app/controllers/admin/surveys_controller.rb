@@ -7,6 +7,10 @@ module Admin
       @surveys = Survey.active.order(:created_at).reverse_order.type(params[:type]).page(params[:page])
     end
 
+    def index_2
+      @surveys = Survey.active.order(:created_at).all
+    end
+
     def destroy
       @survey = Survey.find(params[:id])
       @survey.active = false
