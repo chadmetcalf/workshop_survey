@@ -5,6 +5,10 @@ class FourWeekFeedback < Survey
 
   title 'Four Week Feedback'
 
+  def version
+    '2'
+  end
+
   def to_partial_path
     'surveys/four_week_feedback'
   end

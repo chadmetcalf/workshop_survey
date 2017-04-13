@@ -1,6 +1,5 @@
 class SurveysController < ApplicationController
   def index
-    reset_cookies
     @surveys = Survey.types
   end
 

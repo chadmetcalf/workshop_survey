@@ -42,7 +42,11 @@ class Survey < ApplicationRecord
   end
 
   def cookie_name
-    [self.class.name.underscore, 'session'].join('_').prepend('_')
+    [self.class.name.underscore, version].compact.join('_').prepend('_')
+  end
+
+  def version
+    nil
   end
 
   def to_partial_path
