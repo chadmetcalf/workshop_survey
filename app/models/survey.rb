@@ -41,6 +41,10 @@ class Survey < ApplicationRecord
     []
   end
 
+  def csv_row
+    [type, finished_at, data]
+  end
+
   def cookie_name
     [self.class.name.underscore, version].compact.join('_').prepend('_')
   end

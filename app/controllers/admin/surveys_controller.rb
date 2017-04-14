@@ -1,3 +1,5 @@
+require 'csv'
+
 module Admin
   class SurveysController < AdminApplicationController
     before_action :require_login
@@ -5,6 +7,11 @@ module Admin
     def index
       @survey_type = survey_type
       @surveys = Survey.active.order(:created_at).reverse_order.type(params[:type]).page(params[:page])
+
+      respond_to do |format|
+        format.html { @surveys.page(params[:page]) }
+        format.csv { send_data csv_view(@surveys) }
+      end
     end
 
     def index_2
@@ -29,6 +36,19 @@ module Admin
 
     def survey_params
       params.require(:survey).permit!
+    end
+
+    def csv_view(surveys)
+      CSV.generate do |csv|
+        csv.add_row column_names
+        surveys.each do |survey|
+          csv.add_row survey.csv_row
+        end
+      end
+    end
+
+    def column_names
+      ['Type', 'Finished at', 'Results']
     end
   end
 end
