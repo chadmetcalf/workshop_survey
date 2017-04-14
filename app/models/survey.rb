@@ -42,7 +42,7 @@ class Survey < ApplicationRecord
   end
 
   def csv_row
-    [type, finished_at, data]
+    [type, user_name, finished_at, data]
   end
 
   def cookie_name

@@ -6,11 +6,10 @@ module Admin
 
     def index
       @survey_type = survey_type
-      @surveys = Survey.active.order(:created_at).reverse_order.type(params[:type]).page(params[:page])
 
       respond_to do |format|
-        format.html { @surveys.page(params[:page]) }
-        format.csv { send_data csv_view(@surveys) }
+        format.html { @surveys = Survey.active.order(:created_at).reverse_order.type(params[:type]).page(params[:page]) }
+        format.csv { send_data csv_view( Survey.active.order(:created_at).reverse_order.type(params[:type])) }
       end
     end
 
@@ -48,7 +47,7 @@ module Admin
     end
 
     def column_names
-      ['Type', 'Finished at', 'Results']
+      ['Type', 'Name', 'Finished at', 'Results']
     end
   end
 end
