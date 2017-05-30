@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class WorkshopRegistration < Survey
-  title 'Workshop Registration'
+  title 'Registration'
 
   delegate :surveyjs_pages, to: :class
   delegate :baseline_questions, to: :class

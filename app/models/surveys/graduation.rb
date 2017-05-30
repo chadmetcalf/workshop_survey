@@ -1,16 +1,16 @@
 # frozen_string_literal: true
-class FourWeekFeedback < Survey
+class Graduation < Survey
   delegate :surveyjs_pages, to: :class
   delegate :data_param_keys, to: :class
 
-  title 'Midpoint Feedback'
+  title 'Pilot Completion'
 
   def version
-    '2'
+    '1'
   end
 
   def to_partial_path
-    'surveys/four_week_feedback'
+    'surveys/graduation'
   end
 
   def baseline_question
@@ -42,7 +42,10 @@ class FourWeekFeedback < Survey
                           name:  'learning_culture'),
       Questions::Text.new(data: data.fetch('time_commitment', nil),
                           title: 'How has the time commitment impacted your other responsibilities?',
-                          name:  'time_commitment')
+                          name:  'time_commitment'),
+      Questions::Text.new(data: data.fetch('midpoint_comparison', nil),
+                          title: 'How would you compare the value of the overview sessions versus the kata sessions?',
+                          name:  'midpoint_comparison')
     ]
   end
 
@@ -80,8 +83,8 @@ class FourWeekFeedback < Survey
 
     def pages
       [
-        Page.new(name: :baseline, questions: [baseline_question], title: 'Workshop Baseline'),
-        Page.new(name: :feedback, questions: feedback_questions, title: 'We are looking to see if the workshops are scratching the right itch for MSTS. Please take a sec to leave some feedback on how the pilot program is going.')
+        Page.new(name: :baseline, questions: [baseline_question], title: 'Baseline'),
+        Page.new(name: :feedback, questions: feedback_questions, title: 'We are looking to see if the workshops are scratching the right itch for MSTS. Please take a sec to leave some feedback on how the pilot program went.')
       ]
     end
 

@@ -9,6 +9,7 @@ class Survey < ApplicationRecord
   scope :type,      (->(type) { where(type: type) if type.present? })
 
   delegate :name, to: :user, prefix: true, allow_nil: true
+  delegate :email, to: :user, prefix: true, allow_nil: true
 
   after_initialize :initialize_data
 
@@ -59,11 +60,13 @@ class Survey < ApplicationRecord
 
   class << self
     def types
-      [Null, WorkshopRegistration, FourWeekFeedback].freeze
+      [Null, WorkshopRegistration, FourWeekFeedback, Graduation].freeze
     end
 
     def title(survey_title = "Generic Survey")
+      return @title if @title.present?
       class_eval("def title;\"#{survey_title}\";end")
+      @title = survey_title
     end
 
     def cookie_name(cookie_name = nil)

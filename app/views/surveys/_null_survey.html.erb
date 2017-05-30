@@ -3,7 +3,7 @@
     <h2>Which survey are you here to take?</h2>
     <div>
       <%- @survey_types_not_taken.each do |survey_type| %>
-        <%= link_to survey_type.name.titleize, new_survey_path(type: survey_type.name), class: "btn btn-large btn-primary" %>
+        <%= link_to survey_type.title.titleize, new_survey_path(type: survey_type.name), class: "btn btn-large btn-primary" %>
       <%- end %>
     </div>
   <%- else %>
