@@ -8,8 +8,8 @@ module Admin
       @survey_type = survey_type
 
       respond_to do |format|
-        format.html { @surveys = Survey.active.order(:created_at).reverse_order.type(params[:type]).page(params[:page]) }
-        format.csv { send_data csv_view( Survey.active.order(:created_at).reverse_order.type(params[:type])) }
+        format.html { @surveys = Survey.active.order(:finished_at).reverse_order.type(params[:type]).page(params[:page]) }
+        format.csv { send_data csv_view( Survey.active.order(:finished_at).reverse_order.type(params[:type])) }
       end
     end
 

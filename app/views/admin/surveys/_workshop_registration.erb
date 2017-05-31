@@ -6,7 +6,7 @@
         <%= button_to(admin_survey_path(survey), method: :delete, data: { confirm: 'Are you sure?' }, class: "pull-right  btn-link") do %>
           <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
         <%- end %>
-        <%= survey.user_name %>
+        <%= survey.user_name || survey.user_email %>
       </div>
       <div>
         <%= "#{time_ago_in_words(survey.finished_at)} ago" if survey.finished_at%>

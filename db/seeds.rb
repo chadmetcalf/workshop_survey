@@ -15,18 +15,19 @@ end
 require 'faker'
 
 100.times do
-  User.create(email: Faker::Internet.safe_email('Nancy'),
-              name: Faker::Name.name)
+  name = Faker::Name.name
+  User.create(email: Faker::Internet.safe_email(name),
+              name: (rand(5) + 1) < 4 ? name : nil)
 end
 
 # Make sure that there is at least one of each type of survey in the database
-%w(WorkshopRegistration FourWeekFeedback Null).each do |survey_type|
+%w(WorkshopRegistration FourWeekFeedback Graduation Null).each do |survey_type|
   Survey.find_or_create_by(active: false, type: survey_type)
 end
 
 30.times do
   data = WorkshopRegistration.baseline_questions.keys.each_with_object({}) { |k, acc| acc[k] = rand(5)+1 }
-  WorkshopRegistration.create(user: User.all.sample, data: data, finished_at: Time.now.utc)
+  WorkshopRegistration.create(user: User.all.sample, data: data, finished_at: rand(4000).minutes.ago)
 end
 
 30.times do
@@ -41,5 +42,20 @@ end
            group_size: 'ewfdsf saf asd',
            learning_culture: 'sdg saf sadf dfs',
            time_commitment: 'dsaf dsf  dsaf asdf' }
-  FourWeekFeedback.create(user: User.all.sample, data: data, finished_at: Time.now.utc)
+  FourWeekFeedback.create(user: User.all.sample, data: data, finished_at: rand(4000).minutes.ago)
+end
+
+30.times do
+  data = { baseline: { ci: rand(5)+1,
+                       refactor: rand(5)+1,
+                       twelve_factor: rand(5)+1,
+                       benchmark: rand(5)+1,
+                       authn: rand(5)+1,
+                       pci: rand(5)+1 },
+           value: 'Yes',
+           impact: 'No',
+           group_size: 'ewfdsf saf asd',
+           learning_culture: 'sdg saf sadf dfs',
+           time_commitment: 'dsaf dsf  dsaf asdf' }
+  Graduation.create(user: User.all.sample, data: data, finished_at: rand(4000).minutes.ago)
 end
