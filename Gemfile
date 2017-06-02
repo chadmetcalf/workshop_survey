@@ -6,6 +6,7 @@ source 'https://rubygems.org'
 ruby '2.4.1'
 
 gem 'autoprefixer-rails'
+gem 'awesome_print'
 gem 'clearance'
 gem 'coffee-script'
 gem 'distribution'
@@ -18,7 +19,8 @@ gem 'pg'
 # gem 'postmark-rails'
 gem 'puma'
 gem 'rack-canonical-host'
-gem 'rails', '5.0.1'
+gem 'rails', '5.1.1'
+gem 'rails_semantic_logger'
 gem 'recipient_interceptor'
 gem 'rollbar'
 gem 'sass-rails', '~> 5.0'
@@ -46,7 +48,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'awesome_print'
   gem 'bullet'
   gem 'bundler-audit', '>= 0.5.0', require: false
   gem 'dotenv-rails'
