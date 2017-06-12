@@ -47,7 +47,7 @@ module Admin
     end
 
     def column_names
-      ['Type', 'Name', 'Finished at', 'Results']
+      ['Type', 'User', 'Finished at', 'Results']
     end
   end
 end

@@ -43,7 +43,12 @@ class Survey < ApplicationRecord
   end
 
   def csv_row
-    [type, user_name, finished_at, data]
+    [type, user_identifier, finished_at, data]
+  end
+
+  def user_identifier
+    return user_email if user_name.blank?
+    "#{user_name} <#{user_email}>"
   end
 
   def cookie_name
