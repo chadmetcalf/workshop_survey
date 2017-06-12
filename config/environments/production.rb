@@ -14,8 +14,8 @@ Rails.application.configure do
   config.log_tags = [:request_id]
   config.action_mailer.default_url_options = { host: ENV.fetch('APPLICATION_HOST') }
   config.action_mailer.perform_caching = false
-  # config.action_mailer.delivery_method = :postmark
-  # config.action_mailer.postmark_settings = { api_token: ENV['POSTMARK_API_TOKEN'] }
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = { api_token: ENV['POSTMARK_API_TOKEN'] }
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
