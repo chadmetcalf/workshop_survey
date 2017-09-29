@@ -4,6 +4,7 @@ class SurveysController < ApplicationController
   end
 
   def new
+    raise 'Test Exception!' if (rand(3) <= 1)
     @survey = new_survey.process
     @survey_types_not_taken = new_survey.survey_types_not_taken
   end
